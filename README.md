@@ -24,6 +24,9 @@
 
 ## Project Structure
 
+<img width="500" alt="image" src="https://github.com/user-attachments/assets/44dfc5cf-098f-49f0-9f2e-e3c97e9ec0a8">
+
+
 <br/>
 
 ## Getting Started
