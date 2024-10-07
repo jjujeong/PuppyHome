@@ -36,22 +36,30 @@
 
 ### Installation
 ```
+brew install node
+npm init
 ```
 ### Backend
 ```
 ```
 ### Frontend
 ```
+npm start
 ```
 
 <br/>
 
 ## Demo
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/14e9ea32-a212-46e8-ac2f-3e8961f55797">
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/19b7b138-9d26-4c58-ba36-9d52cafd22d0">
+
 
 <br/>
 
 
 ## Main Feature
+<img width="400" alt="image" src="https://github.com/user-attachments/assets/bb98d2ec-5571-4c3c-95c0-e19cc21eff57">
+
 
 <br/>
 
@@ -61,3 +69,5 @@
 |서진주|이현정|
 |React|FastAPI|
 | |Spring Boot|
+
+[😊우리들의 노션](https://www.notion.so/PuppyHome-11567baf376d80cd8bb5d64c2df81fcf)
