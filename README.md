@@ -67,7 +67,6 @@ npm start
 |Frontend|Backend|
 |--------|--------|
 |서진주|이현정|
-|React|FastAPI|
-| |Spring Boot|
+|React|Spring Boot|
 
 [😊우리들의 노션](https://www.notion.so/PuppyHome-11567baf376d80cd8bb5d64c2df81fcf)
