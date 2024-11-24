@@ -7,5 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class CrawlingApplication {
     public static void main(String[] args) {
         SpringApplication.run(CrawlingApplication.class, args);
+        SpringApplication.run(JsonFileTransformer.class, args);
     }
 }
