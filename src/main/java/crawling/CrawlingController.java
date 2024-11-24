@@ -49,7 +49,7 @@ public class CrawlingController {
                             ));
 
                     String adoptionStatus = animalInfo.get("입양상태");
-                    if (!adoptionStatus.equals("입양가능")) {
+                    if (adoptionStatus == null || !adoptionStatus.equals("입양가능")) {
                         continue;
                     }
 
