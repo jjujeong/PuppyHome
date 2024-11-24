@@ -26,7 +26,6 @@ public class CrawlingController {
         try {
             File outputFile = new File(outputFilePath);
             if (!outputFile.exists() && !outputFile.createNewFile()) {
-                System.err.println("파일 생성 실패: " + outputFilePath);
                 return "파일 생성 실패";
             }
 
