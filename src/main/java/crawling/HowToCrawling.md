@@ -1,4 +1,7 @@
 # Crawling 하는 법
 
-아주 간단하고 쉽습니다!!!
-**CrawlingApplication**을 실행해주면 됩니당.
+
+1. http://localhost:8080/crawl 접속
+2. **CrawlingApplication**을 실행
+3. http://localhost:8080/crawl 새로고침
+4. crawling_animal_data.json 파일을 확인
