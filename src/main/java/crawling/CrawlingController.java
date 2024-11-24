@@ -4,8 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -48,20 +48,23 @@ public class CrawlingController {
                                     element -> element.select("div").text()
                             ));
 
+                    String adoptionStatus = animalInfo.get("입양상태");
+                    if (!adoptionStatus.equals("입양가능")) {
+                        continue;
+                    }
+
                     List<String> imageUrls = document.select(".photo_bimg_1 img").stream()
                             .map(img -> "https://www.daejeon.go.kr" + img.attr("src"))
                             .collect(Collectors.toList());
+
+                    animalInfo.put("imageUrls", String.join(", ", imageUrls));
 
                     if (animalInfo.isEmpty() && imageUrls.isEmpty()) {
                         System.out.println("빈 데이터:  " + i);
                         continue;
                     }
 
-                    Map<String, Object> result = new HashMap<>();
-                    result.put("animalInfo", animalInfo);
-                    result.put("imageUrls", imageUrls);
-
-                    String jsonString = objectMapper.writeValueAsString(result);
+                    String jsonString = objectMapper.writeValueAsString(animalInfo);
                     fileWriter.write(jsonString + "\n");
                     fileWriter.flush();
 
