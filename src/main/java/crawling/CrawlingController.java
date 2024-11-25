@@ -20,19 +20,19 @@ public class CrawlingController {
     public String crawlAnimalData() {
         String outputFilePath = "crawling_animal_data.json";
         ObjectMapper objectMapper = new ObjectMapper();
-        int startSeq = 45143;
-        int endSeq = 45549;
+        int startSeq = 45572;
+        int endSeq = 45593;
 
         try {
             File outputFile = new File(outputFilePath);
             if (!outputFile.exists() && !outputFile.createNewFile()) {
+                System.err.println("파일 생성 실패: " + outputFilePath);
                 return "파일 생성 실패";
             }
 
             try (FileWriter fileWriter = new FileWriter(outputFile, true)) {
                 for (int i = startSeq; i < endSeq; i++) {
-                    String url = "https://www.daejeon.go.kr/ani/AniStrayAnimalView.do?animalSeq=" + i
-                            + "&gubun=&menuSeq=3108&flag=0&pageIndex=1&searchCondition3=2";
+                    String url = "https://www.daejeon.go.kr/ani/AniStrayAnimalView.do?animalSeq=" + i + "&gubun=&menuSeq=3108&flag=&pageIndex=1";
 
                     try {
                         Connection.Response response = Jsoup.connect(url)
@@ -56,8 +56,8 @@ public class CrawlingController {
                             continue;
                         }
 
-                        String adoptionStatus = animalInfo.get("입양상태");
-                        if (adoptionStatus == null || !adoptionStatus.equals("입양가능")) {
+                        String adoptionStatus = animalInfo.getOrDefault("입양상태", "");
+                        if ("입양완료".equals(adoptionStatus) || adoptionStatus.isEmpty()) {
                             continue;
                         }
 
