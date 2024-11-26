@@ -1,11 +1,11 @@
-package com.example.mongodbtest;
+package dbstorage;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MongoDbTestApplication {
+public class DbStorageApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MongoDbTestApplication.class, args);
+        SpringApplication.run(DbStorageApplication.class, args);
     }
 }
