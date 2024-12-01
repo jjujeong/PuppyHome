@@ -20,13 +20,4 @@ public class EmailSubscriber implements Subscriber {
             animals.forEach(System.out::println);
         }
     }
-//    System.out.println( subscriber.getClass().getSimpleName() + " 에게  " + filteredAnimals.size() + " 동물들.");
-//
-//            if (subscriber instanceof EmailSubscriber) {
-//        System.out.println("설정한 조건에 맞는 동물을 찾았습니다:");
-//
-//        filteredAnimals.forEach(animal -> {
-//            System.out.println(animal.getAnnouncementNumber() + ", " + animal.getImageUrls());
-//        });
-//    }
 }

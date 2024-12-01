@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class AnimalService {
+class AlarmManager {
     private final List<Subscriber> subscribers = new ArrayList<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -20,7 +20,7 @@ class AnimalService {
         System.out.println("Subscriber added: " + subscriber.getClass().getSimpleName());
     }
 
-    public void notifySubscribers(AnimalFilter filter) {
+    public void notifyAlarmOn(AnimalFilter filter) {
         String jsonFilePath = "converted_animal_data.json";
         File jsonFile = new File(jsonFilePath);
         if (!jsonFile.exists()) {
