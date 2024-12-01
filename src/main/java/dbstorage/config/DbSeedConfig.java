@@ -7,11 +7,13 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
 import java.io.InputStream;
 import java.util.List;
 
 @Configuration
+@Profile("dbstorage") // "dbstorage" 프로파일에서만 활성화
 public class DbSeedConfig {
 
     @Bean
