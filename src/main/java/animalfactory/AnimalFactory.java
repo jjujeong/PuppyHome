@@ -1,4 +1,5 @@
 // 데이터베이스에서 데이터를 가져와 적절한 객체를 생성하는 Factory 클래스
+
 package animalfactory;
 
 import java.util.List;
