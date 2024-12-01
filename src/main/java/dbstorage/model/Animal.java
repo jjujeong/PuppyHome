@@ -197,6 +197,11 @@ public class Animal {
         this.imageUrls = Arrays.asList(imageUrls.split(",\\s*"));
     }
 
+    @Override
+    public String toString() {
+        return  "공고번호 : " + announcementNumber + ", 이미지 : " + imageUrls ;
+    }
+
     public List<String> getImageUrls() {
         return imageUrls;
     }

@@ -1,17 +1,23 @@
 package org.example.puppyhome.notification;
 
-public class AppSubscriber implements Subscriber {
-    private String name;
-    private String appId;
+import java.util.List;
+import dbstorage.model.Animal;
 
-    public AppSubscriber(String name, String appId) {
-        this.name = name;
+public class AppSubscriber implements Subscriber {
+    private final String appId;
+
+    public AppSubscriber(String appId) {
         this.appId = appId;
     }
 
     @Override
-    public void update(String data) {
-        System.out.println(name + "님에게 " + appId + "(으)로 " + data + "(을)를 전송했습니다.");
-        // 실제 푸시 알림 로직 추가 가능
+    public void notify(List<Animal> animals) {
+        System.out.println("Sending app to: " + appId);
+        if (animals.isEmpty()) {
+            System.out.println("No animals matching your criteria.");
+        } else {
+            System.out.println("Matching animals: ");
+            animals.forEach(System.out::println);
+        }
     }
 }
