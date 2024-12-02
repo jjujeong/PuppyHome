@@ -9,11 +9,18 @@ public class AgeRangeSearch extends AnimalSearchTemplate {
     private final double startAge;
     private final double endAge;
 
-    public AgeRangeSearch(double startAge, double endAge, AnimalRepository animalRepository) {
+    public AgeRangeSearch(double startAge, double endAge, AnimalRepository animalRepository) { // 6개월 ~ 12개월 연령 검색
         super(animalRepository);
         this.startAge = startAge;
         this.endAge = endAge;
     }
+
+    public AgeRangeSearch(double age, AnimalRepository animalRepository) { // ex) 6개월 연령 검색
+        super(animalRepository);
+        this.startAge = age;
+        this.endAge = age;
+    }
+
 
     @Override
     protected boolean filter(Animal animal) {
