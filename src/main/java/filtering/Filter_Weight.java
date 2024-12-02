@@ -1,4 +1,3 @@
-
 package filtering;
 
 import dbstorage.model.Animal;
@@ -37,7 +36,7 @@ public class Filter_Weight extends Abstract_Filter {
             if (weightString.contains("(추정)")) {
                 weightString = weightString.replace("(추정)", "").trim();
             }
-            // "kg" 단위를 제거
+            // "kg" 단위 제거
             if (weightString.contains("kg")) {
                 weightString = weightString.replace("kg", "").trim();
             }

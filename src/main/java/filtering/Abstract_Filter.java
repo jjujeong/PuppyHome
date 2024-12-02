@@ -16,7 +16,7 @@ public abstract class Abstract_Filter {
         this.animalRepository = animalRepository;
     }
 
-    // 템플릿 메서드: 검색 로직의 뼈대
+    // 템플릿 메서드: 검색 로직의 디폴트 정의
     public final List<Animal> search() {
         List<Animal> allAnimals = animalRepository.findAll();
         return allAnimals.stream()
@@ -24,6 +24,6 @@ public abstract class Abstract_Filter {
                 .collect(Collectors.toList());
     }
 
-    // 필터 조건을 정의하는 추상 메서드
+    // 추상 메서드: 각 필터 조건 정의
     protected abstract boolean filter(Animal animal);
 }
