@@ -12,9 +12,10 @@ public class FilterController {
         List<Animal> results = searchTemplate.search();
 
         if (results.isEmpty()) {
+            // 검색 결과가 없는 경우
             System.out.println("검색 결과가 없습니다.");
         } else {
-            System.out.println("검색 결과:");
+            // 검색 결과 있는 경우 출력
             results.forEach(System.out::println);
         }
     }
