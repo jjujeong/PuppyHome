@@ -16,21 +16,22 @@ public class Main {
         // 사용자가 원하는 조건 설정
         AnimalFilter hyunjeonFilter = new AnimalFilter()
                 .setType("개")
-                .setIntakeAge("3년령", "10년령");
+                .setIntakeAge("3년령");
 
         AnimalFilter jinjuFilter = new AnimalFilter()
-                .setType("고양이");
-
-        AnimalFilter hyeonseoFilter = new AnimalFilter()
-                .setType("개")
-                .setBreed("믹스");
+                .setType("고양이")
+                .setGender("여");
+//
+//        AnimalFilter hyeonseoFilter = new AnimalFilter()
+//                .setType("개")
+//                .setBreed("믹스");
 
 
 
 //        // 조건에 따른 알림 설정
-//        hyunjeon.notifySubscribers(hyunjeonFilter);
-//        jinju.notifySubscribers(jinjuFilter);
-        hyeonseo.notifyAlarmOn(hyeonseoFilter);
+//        hyunjeon.notifyAlarmOn(hyunjeonFilter);
+        jinju.notifyAlarmOn(jinjuFilter);
+//        hyeonseo.notifyAlarmOn(hyeonseoFilter);
 
 
     }
