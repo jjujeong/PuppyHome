@@ -9,13 +9,15 @@ public class Filter_Age extends Abstract_Filter {
     private final double startAge;
     private final double endAge;
 
-    public Filter_Age(double startAge, double endAge, AnimalRepository animalRepository) { // 6개월 ~ 12개월 연령 검색
+    // ex) 6개월 ~ 12개월 연령 검색
+    public Filter_Age(double startAge, double endAge, AnimalRepository animalRepository) {
         super(animalRepository);
         this.startAge = startAge;
         this.endAge = endAge;
     }
 
-    public Filter_Age(double age, AnimalRepository animalRepository) { // ex) 6개월 연령 검색
+    // ex) 6개월 연령 검색
+    public Filter_Age(double age, AnimalRepository animalRepository) {
         super(animalRepository);
         this.startAge = age;
         this.endAge = age;
