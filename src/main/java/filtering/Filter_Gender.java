@@ -3,11 +3,11 @@ package filtering;
 import dbstorage.model.Animal;
 import dbstorage.repository.AnimalRepository;
 
-public class GenderSearch extends AnimalSearchTemplate {
+public class Filter_Gender extends Abstract_Filter {
 
     private final String gender;
 
-    public GenderSearch(String gender, AnimalRepository animalRepository) {
+    public Filter_Gender(String gender, AnimalRepository animalRepository) {
         super(animalRepository);
         this.gender = gender;
     }

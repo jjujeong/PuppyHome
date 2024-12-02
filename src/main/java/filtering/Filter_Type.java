@@ -3,18 +3,18 @@ package filtering;
 import dbstorage.model.Animal;
 import dbstorage.repository.AnimalRepository;
 
-public class BreedSearch extends AnimalSearchTemplate {
+public class Filter_Type extends Abstract_Filter {
 
     private final String type;
 
-    public BreedSearch(String type, AnimalRepository animalRepository) {
+    public Filter_Type(String type, AnimalRepository animalRepository) {
         super(animalRepository);
         this.type = type;
     }
 
     @Override
     protected boolean filter(Animal animal) {
-        return animal.getBreed().equalsIgnoreCase(type);
+        return animal.getType().equalsIgnoreCase(type);
     }
 }
 

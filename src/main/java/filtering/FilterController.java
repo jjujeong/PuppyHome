@@ -6,9 +6,9 @@ import org.springframework.stereotype.Controller;
 import java.util.List;
 
 @Controller
-public class AnimalSearchController {
+public class FilterController {
 
-    public void searchAndDisplay(AnimalSearchTemplate searchTemplate) {
+    public void searchAndDisplay(Abstract_Filter searchTemplate) {
         List<Animal> results = searchTemplate.search();
 
         if (results.isEmpty()) {

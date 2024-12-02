@@ -4,18 +4,18 @@ package filtering;
 import dbstorage.model.Animal;
 import dbstorage.repository.AnimalRepository;
 
-public class AgeRangeSearch extends AnimalSearchTemplate {
+public class Filter_Age extends Abstract_Filter {
 
     private final double startAge;
     private final double endAge;
 
-    public AgeRangeSearch(double startAge, double endAge, AnimalRepository animalRepository) { // 6개월 ~ 12개월 연령 검색
+    public Filter_Age(double startAge, double endAge, AnimalRepository animalRepository) { // 6개월 ~ 12개월 연령 검색
         super(animalRepository);
         this.startAge = startAge;
         this.endAge = endAge;
     }
 
-    public AgeRangeSearch(double age, AnimalRepository animalRepository) { // ex) 6개월 연령 검색
+    public Filter_Age(double age, AnimalRepository animalRepository) { // ex) 6개월 연령 검색
         super(animalRepository);
         this.startAge = age;
         this.endAge = age;
