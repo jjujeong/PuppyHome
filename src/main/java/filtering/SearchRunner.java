@@ -17,7 +17,7 @@ public class SearchRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // 종류 검색
+        // 동물 종류 검색
         AnimalSearchTemplate typeSearch = new TypeSearch("개", animalRepository);
         System.out.println("종류가 '개'인 동물 검색:");
         searchController.searchAndDisplay(typeSearch);
@@ -32,7 +32,11 @@ public class SearchRunner implements CommandLineRunner {
         System.out.println("\n나이가 '6개월에서 12개월' 사이인 동물 검색:");
         searchController.searchAndDisplay(ageSearch);
 
-        // 종  검색
+        AnimalSearchTemplate ageSearch2 = new AgeRangeSearch(6, animalRepository); // 6개월 ~ 1년
+        System.out.println("\n나이가 '6개월'인 동물 검색:");
+        searchController.searchAndDisplay(ageSearch2);
+
+        // 종 검색
         AnimalSearchTemplate breedSearch = new BreedSearch("푸들", animalRepository); // 6개월 ~ 1년
         System.out.println("\n종이 '푸들'인 동물 검색:");
         searchController.searchAndDisplay(breedSearch);
