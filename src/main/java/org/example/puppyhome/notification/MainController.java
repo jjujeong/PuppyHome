@@ -1,8 +1,18 @@
 package org.example.puppyhome.notification;
 
-public class Main {
-    public static void main(String[] args) {
-        // 동물 조건 알림 서비스를 이용할 사용자
+import io.swagger.v3.oas.annotations.Operation;
+import org.springframework.boot.SpringApplication;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.Mapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@Controller
+public class MainController {
+    @GetMapping("/alarm")
+    @Operation(summary = "데이터 크롤링", description = "내가 원하는 동물 정보에 맞는 동물이 입력되면 동물 정보가 알림으로 옵니다.")
+    public void alarm() {
         AlarmManager hyunjeon = new AlarmManager();
         AlarmManager jinju = new AlarmManager();
         AlarmManager hyeonseo = new AlarmManager();
@@ -24,10 +34,9 @@ public class Main {
                 .setType("개")
                 .setBreed("믹스");
 
-//        // 조건에 따른 알림 설정
-//        hyunjeon.notifySubscribers(hyunjeonFilter);
-//        jinju.notifySubscribers(jinjuFilter);
+        //        // 조건에 따른 알림 설정
+        //        hyunjeon.notifySubscribers(hyunjeonFilter);
+        //        jinju.notifySubscribers(jinjuFilter);
         hyeonseo.notifyAlarmOn(hyeonseoFilter);
-
     }
 }

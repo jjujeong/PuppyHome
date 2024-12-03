@@ -11,7 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-class AlarmManager {
+
+public class AlarmManager {
     private final List<Subscriber> subscribers = new ArrayList<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
