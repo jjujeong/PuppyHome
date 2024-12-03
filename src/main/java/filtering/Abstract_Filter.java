@@ -16,7 +16,7 @@ public abstract class Abstract_Filter {
         this.animalRepository = animalRepository;
     }
 
-    // 템플릿 메서드: 검색 로직의 디폴트 정의
+    // 템플릿 메서드: 검색 로직의 골격 정의
     public final List<Animal> search() {
         List<Animal> allAnimals = animalRepository.findAll();
         return allAnimals.stream()
