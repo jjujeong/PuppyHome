@@ -20,7 +20,7 @@ public class CrawlingController {
     public String crawlAnimalData() {
         String outputFilePath = "crawling_animal_data.json";
         ObjectMapper objectMapper = new ObjectMapper();
-        int startSeq = 45572;
+        int startSeq = 45319;
         int endSeq = 45593;
 
         try {
