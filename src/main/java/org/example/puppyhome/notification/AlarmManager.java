@@ -3,7 +3,7 @@ package org.example.puppyhome.notification;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import dbstorage.model.Animal;
+import org.example.puppyhome.dbstorage.model.Animal;
 
 import java.io.File;
 import java.io.IOException;

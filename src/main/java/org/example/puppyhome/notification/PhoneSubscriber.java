@@ -1,7 +1,7 @@
 package org.example.puppyhome.notification;
 
 import java.util.List;
-import dbstorage.model.Animal;
+import org.example.puppyhome.dbstorage.model.Animal;
 
 public class PhoneSubscriber implements Subscriber {
     private final String phoneNumber;

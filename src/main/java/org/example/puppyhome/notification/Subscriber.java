@@ -1,6 +1,6 @@
 package org.example.puppyhome.notification;
 
-import dbstorage.model.Animal;
+import org.example.puppyhome.dbstorage.model.Animal;
 import java.util.List;
 
 public interface Subscriber {
