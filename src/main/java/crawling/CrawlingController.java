@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 public class CrawlingController {
-    private int startNum = 45574;
+    private int startNum = 45319;
     private int endNum = 45597;
 
     @GetMapping("/crawl")
