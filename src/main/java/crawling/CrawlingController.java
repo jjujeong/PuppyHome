@@ -15,13 +15,13 @@ import java.util.stream.Collectors;
 
 @RestController
 public class CrawlingController {
+    private int startNum = 45319;
+    private int endNum = 45597;
 
     @GetMapping("/crawl")
     public String crawlAnimalData() {
         String outputFilePath = "crawling_animal_data.json";
         ObjectMapper objectMapper = new ObjectMapper();
-        int startSeq = 45319;
-        int endSeq = 45593;
 
         try {
             File outputFile = new File(outputFilePath);
@@ -31,7 +31,7 @@ public class CrawlingController {
             }
 
             try (FileWriter fileWriter = new FileWriter(outputFile, true)) {
-                for (int i = startSeq; i < endSeq; i++) {
+                for (int i = startNum; i < endNum; i++) {
                     String url = "https://www.daejeon.go.kr/ani/AniStrayAnimalView.do?animalSeq=" + i + "&gubun=&menuSeq=3108&flag=&pageIndex=1";
 
                     try {
