@@ -1,7 +1,9 @@
 package org.example.puppyhome.notification;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.example.puppyhome.dbstorage.model.Animal;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class AnimalFilter {
     private String breed;
     private String type;
@@ -47,11 +49,6 @@ class AnimalFilter {
 
     public AnimalFilter setFurColor(String furColor) {
         this.furColor = furColor;
-        return this;
-    }
-
-    public AnimalFilter setAnnouncementPeriod(String announcementPeriod) {
-        this.announcementPeriod = announcementPeriod;
         return this;
     }
 
