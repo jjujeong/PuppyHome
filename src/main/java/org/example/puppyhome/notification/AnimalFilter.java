@@ -73,6 +73,7 @@ class AnimalFilter {
     }
 
     private double parseAge(String ageString) {
+        if (ageString == null) return 0.0f;
         double age = 0.0;
         try {
             if (ageString.contains("(추정)")) {

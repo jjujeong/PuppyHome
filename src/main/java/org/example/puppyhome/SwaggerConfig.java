@@ -19,7 +19,7 @@ public class SwaggerConfig {
     private Info apiInfo() {
         return new Info()
                 .title("PuppyHome")
-                .description("유기묘/견 크롤링 및 데이터 제공 서비스")
+                .description("유기동물 크롤링 및 데이터 제공 서비스")
                 .version("0.1");
     }
 

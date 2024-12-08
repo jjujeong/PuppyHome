@@ -1,23 +1,28 @@
 package org.example.puppyhome.notification;
 
-import java.util.List;
 import org.example.puppyhome.dbstorage.model.Animal;
 
+import java.util.List;
+
 public class AppSubscriber implements Subscriber {
-    private final String appId;
+    private String appId;
 
     public AppSubscriber(String appId) {
         this.appId = appId;
     }
 
     @Override
-    public void notify(List<Animal> animals) {
-        System.out.println("Sending app to: " + appId);
+    public String notify(List<Animal> animals) {
+        StringBuilder notificationMessage = new StringBuilder();
+        notificationMessage.append("Sending app to: ").append(appId).append("\n");
+
         if (animals.isEmpty()) {
-            System.out.println("No animals matching your criteria.");
+            notificationMessage.append("No animals matching your criteria.\n");
         } else {
-            System.out.println("Matching animals: ");
-            animals.forEach(System.out::println);
+            notificationMessage.append("Matching animals: \n");
+            animals.forEach(animal -> notificationMessage.append(animal.toString()).append("\n"));
         }
+
+        return notificationMessage.toString();
     }
 }

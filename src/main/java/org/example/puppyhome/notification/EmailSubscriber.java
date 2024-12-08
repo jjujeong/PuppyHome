@@ -1,23 +1,28 @@
 package org.example.puppyhome.notification;
 
-import java.util.List;
 import org.example.puppyhome.dbstorage.model.Animal;
 
-public class EmailSubscriber implements Subscriber {
-    private final String email;
+import java.util.List;
 
-    public EmailSubscriber(String email) {
+public class EmailSubscriber implements Subscriber {
+    private String email;
+
+    public EmailSubscriber(String appId) {
         this.email = email;
     }
 
     @Override
-    public void notify(List<Animal> animals) {
-        System.out.println("email로 알림을 전송합니다. " + email);
+    public String notify(List<Animal> animals) {
+        StringBuilder notificationMessage = new StringBuilder();
+        notificationMessage.append("Sending app to: ").append(email).append("\n");
+
         if (animals.isEmpty()) {
-            System.out.println("조건에 맞는 동물이 없습니다..");
+            notificationMessage.append("No animals matching your criteria.\n");
         } else {
-            System.out.println("조건에 맞는 동물들 :  ");
-            animals.forEach(System.out::println);
+            notificationMessage.append("Matching animals: \n");
+            animals.forEach(animal -> notificationMessage.append(animal.toString()).append("\n"));
         }
+
+        return notificationMessage.toString();
     }
 }

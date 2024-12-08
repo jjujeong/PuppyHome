@@ -6,6 +6,9 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import org.springframework.stereotype.Component;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @Component
 public class JsonFileTransformer {
@@ -13,6 +16,7 @@ public class JsonFileTransformer {
     public static void main(String[] args) throws IOException {
         String inputFilePath = "crawling_animal_data.json";
         String outputFilePath = "converted_animal_data.json";
+        Path inputPath = Paths.get(inputFilePath);
 
         try {
             File outputFile = new File(outputFilePath);
@@ -44,6 +48,8 @@ public class JsonFileTransformer {
                 fileWriter.write("\n]");
             }
             System.out.println("JSON 배열이 저장되었습니다: " + outputFilePath);
+            Files.deleteIfExists(inputPath);
+            System.out.println("파일이 성공적으로 삭제되었습니다.");
         } catch (IOException e) {
             System.err.println("JSON 변환 실패: " + e.getMessage());
         }
