@@ -6,9 +6,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 import org.example.puppyhome.crawling.CrawlingController;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @EnableMongoRepositories
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"org.example.puppyhome"})
 public class PuppyHomeApplication implements CommandLineRunner {
 
 	@Autowired
@@ -20,9 +21,6 @@ public class PuppyHomeApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		System.out.println("크롤링 시작...");
-
-//		String result = crawlingController.crawlAnimalData();
-//		System.out.println(result);
+		System.out.println("프로그램 시작...");
 	}
 }

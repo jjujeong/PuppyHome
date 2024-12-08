@@ -1,5 +1,8 @@
 package org.example.puppyhome.notification;
 
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 public class Main {
     public static void main(String[] args) {
         // 동물 조건 알림 서비스를 이용할 사용자
