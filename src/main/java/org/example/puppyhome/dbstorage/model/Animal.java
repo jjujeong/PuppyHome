@@ -62,6 +62,9 @@ public class Animal {
     @JsonProperty("imageUrls")
     private List<String> imageUrls;
 
+    @JsonProperty("공고일")
+    private String announcementDate;
+
 
     // Getter, Setter
     public String getId() {
@@ -204,4 +207,8 @@ public class Animal {
     public List<String> getImageUrls() {
         return imageUrls;
     }
+
+    public String getAnnouncementDate() {return announcementDate;}
+
+    public void setAnnouncementDate(String announcementDate) {this.announcementDate = announcementDate;}
 }
