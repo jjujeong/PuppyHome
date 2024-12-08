@@ -22,7 +22,7 @@ public class PuppyHomeApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		System.out.println("크롤링 시작...");
 
-		String result = crawlingController.crawlAnimalData();
-		System.out.println(result);
+//		String result = crawlingController.crawlAnimalData();
+//		System.out.println(result);
 	}
 }
