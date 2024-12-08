@@ -1,53 +1,70 @@
-// Animal 클래스는 데이터베이스에서 가져온 유기동물 데이터를 공통 속성으로 관리하는 추상 클래스
-package animalfactory;
+
+package org.example.puppyhome.dbstorage.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Arrays;
 import java.util.List;
 
-public abstract class Animal {
-    protected String id;
-    protected String announcementPeriod; // 공고기간
-    protected String announcementNumber; // 공고번호
-    protected String intakeAge; // 입소 당시 나이
-    protected String weight; // 몸무게
-    protected String breed; // 품종
-    protected String managementNumber; // 관리번호
-    protected String type; // 종류
-    protected String gender; // 성별
-    protected String foundLocation; // 발견장소
-    protected String regionClassification; // 지역분류
-    protected String furColor; // 모색
-    protected String adoptionStatus; // 입양상태
-    protected String adoptionStartDate; // 입양 신청 시작일시
-    protected String additionalInfo; // 기타정보
-    protected String rescueDate; // 구조일
-    protected List<String> imageUrls; // 이미지 URL 목록
+@Document(collection = "animals")
+public class Animal {
+    @Id
+    @JsonProperty("id")
+    private String id;
 
-    public Animal(String id, String announcementPeriod, String announcementNumber, String intakeAge, String weight, String breed,
-                  String managementNumber, String type, String gender, String foundLocation, String regionClassification,
-                  String furColor, String adoptionStatus, String adoptionStartDate, String additionalInfo,
-                  String rescueDate, List<String> imageUrls) {
-        this.id = id;
-        this.announcementPeriod = announcementPeriod;
-        this.announcementNumber = announcementNumber;
-        this.intakeAge = intakeAge;
-        this.weight = weight;
-        this.breed = breed;
-        this.managementNumber = managementNumber;
-        this.type = type;
-        this.gender = gender;
-        this.foundLocation = foundLocation;
-        this.regionClassification = regionClassification;
-        this.furColor = furColor;
-        this.adoptionStatus = adoptionStatus;
-        this.adoptionStartDate = adoptionStartDate;
-        this.additionalInfo = additionalInfo;
-        this.rescueDate = rescueDate;
-        this.imageUrls = imageUrls;
-    }
+    @JsonProperty("공고기간")
+    private String announcementPeriod;
 
-    // 유기동물 정보를 출력하는 추상 메서드
-    public abstract void displayInfo();
+    @JsonProperty("공고번호")
+    private String announcementNumber;
+
+    @JsonProperty("입소 당시 나이")
+    private String intakeAge;
+
+    @JsonProperty("몸무게")
+    private String weight;
+
+    @JsonProperty("품종")
+    private String breed;
+
+    @JsonProperty("관리번호")
+    private String managementNumber;
+
+    @JsonProperty("종류")
+    private String type;
+
+    @JsonProperty("성별")
+    private String gender;
+
+    @JsonProperty("발견장소")
+    private String foundLocation;
+
+    @JsonProperty("지역분류")
+    private String regionClassification;
+
+    @JsonProperty("모색")
+    private String furColor;
+
+    @JsonProperty("입양상태")
+    private String adoptionStatus;
+
+    @JsonProperty("입양신청 시작 일시")
+    private String adoptionStartDate;
+
+    @JsonProperty("기타정보")
+    private String additionalInfo;
+
+    @JsonProperty("구조일")
+    private String rescueDate;
+
+    @JsonProperty("imageUrls")
+    private List<String> imageUrls;
+
+    @JsonProperty("공고일")
+    private String announcementDate;
+
 
     // Getter, Setter
     public String getId() {
@@ -178,13 +195,20 @@ public abstract class Animal {
         this.rescueDate = rescueDate;
     }
 
-    // Setter에서 문자열 데이터를 리스트로 변환
     public void setImageUrls(String imageUrls) {
-        // 문자열을 쉼표(,)로 분리하여 리스트로 변환
         this.imageUrls = Arrays.asList(imageUrls.split(",\\s*"));
+    }
+
+    @Override
+    public String toString() {
+        return  "공고번호 : " + announcementNumber + ", 이미지 : " + imageUrls ;
     }
 
     public List<String> getImageUrls() {
         return imageUrls;
     }
+
+    public String getAnnouncementDate() {return announcementDate;}
+
+    public void setAnnouncementDate(String announcementDate) {this.announcementDate = announcementDate;}
 }

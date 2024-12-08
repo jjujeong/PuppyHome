@@ -1,18 +1,26 @@
-package crawling;
+package org.example.puppyhome.crawling;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import org.springframework.stereotype.Component;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-@Component
+@RestController
 public class JsonFileTransformer {
 
-    public static void main(String[] args) throws IOException {
+    @GetMapping("/JsonFileTrans")
+    @Tag(name=" json 배열 파일로 바꾸기")
+    public String JsonFileTransformer()  {
         String inputFilePath = "crawling_animal_data.json";
         String outputFilePath = "converted_animal_data.json";
+        Path inputPath = Paths.get(inputFilePath);
 
         try {
             File outputFile = new File(outputFilePath);
@@ -44,8 +52,11 @@ public class JsonFileTransformer {
                 fileWriter.write("\n]");
             }
             System.out.println("JSON 배열이 저장되었습니다: " + outputFilePath);
+            Files.deleteIfExists(inputPath);
+            System.out.println("파일이 성공적으로 삭제되었습니다.");
         } catch (IOException e) {
             System.err.println("JSON 변환 실패: " + e.getMessage());
         }
+        return "파일이 성공적으로 변환되었습니다";
     }
 }

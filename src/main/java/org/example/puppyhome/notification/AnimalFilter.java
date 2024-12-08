@@ -1,7 +1,9 @@
 package org.example.puppyhome.notification;
 
-import dbstorage.model.Animal;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.example.puppyhome.dbstorage.model.Animal;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 class AnimalFilter {
     private String breed;
     private String type;
@@ -50,11 +52,6 @@ class AnimalFilter {
         return this;
     }
 
-    public AnimalFilter setAnnouncementPeriod(String announcementPeriod) {
-        this.announcementPeriod = announcementPeriod;
-        return this;
-    }
-
     public AnimalFilter setAnnouncementNumber(String announcementNumber) {
         this.announcementNumber = announcementNumber;
         return this;
@@ -73,6 +70,7 @@ class AnimalFilter {
     }
 
     private double parseAge(String ageString) {
+        if (ageString == null) return 0.0f;
         double age = 0.0;
         try {
             if (ageString.contains("(추정)")) {

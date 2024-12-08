@@ -1,7 +1,7 @@
-package dbstorage.config;
+package org.example.puppyhome.dbstorage.config;
 
-import dbstorage.model.Animal;
-import dbstorage.repository.AnimalRepository;
+import org.example.puppyhome.dbstorage.model.Animal;
+import org.example.puppyhome.dbstorage.repository.AnimalRepository;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.CommandLineRunner;
@@ -13,7 +13,7 @@ import java.io.InputStream;
 import java.util.List;
 
 @Configuration
-@Profile("dbstorage") // "dbstorage" 프로파일에서만 활성화
+@Profile("dbstorage")
 public class DbSeedConfig {
 
     @Bean
