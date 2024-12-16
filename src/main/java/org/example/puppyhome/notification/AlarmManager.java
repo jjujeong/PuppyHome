@@ -14,12 +14,32 @@ public class AlarmManager {
     private final List<Subscriber> subscribers = new ArrayList<>();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
+
+    public boolean checkExists(String identifier) {
+        var target = subscribers.stream()
+                        .filter(subscriber -> subscriber.getIdentifier().equals(identifier))
+                        .findFirst();
+        return target.isPresent();
+    }
+
     public void subscribe(Subscriber subscriber) {
         subscribers.add(subscriber);
         System.out.println("Subscriber added: " + subscriber.getClass().getSimpleName());
     }
 
-    public String notifyAlarmOn(AnimalFilter filter) {
+    private List<Subscriber> getSubsAssociateWithUser(UserPreferences userPreferences) {
+        return subscribers.stream().filter(
+                sub -> {
+                    String identifier = sub.getIdentifier();
+                    return
+                            identifier.equals(userPreferences.getAppId()) ||
+                            identifier.equals(userPreferences.getPhone()) ||
+                            identifier.equals(userPreferences.getEmail());
+                }
+            ).toList();
+    }
+
+    public String notifyAlarmOn(UserPreferences userPreferences) {
         String jsonFilePath = "converted_animal_data.json";
         File jsonFile = new File(jsonFilePath);
         StringBuilder notificationResults = new StringBuilder();
@@ -35,7 +55,11 @@ public class AlarmManager {
             return notificationResults.toString();
         }
 
+        AnimalFilter filter = userPreferences.getAnimalFilter();
         List<Animal> filteredAnimals = filterAnimals(animals, filter);
+
+        System.out.println(filteredAnimals);
+
 
         if (filteredAnimals.isEmpty()) {
             notificationResults.append("필터 기준에 맞는 동물이 없습니다.\n");
@@ -43,9 +67,12 @@ public class AlarmManager {
             notificationResults.append(filteredAnimals.size()).append("건의 알림이 있습니다.\n");
         }
 
-        subscribers.forEach(subscriber -> {
-            notificationResults.append(subscriber.notify(filteredAnimals)).append("\n");
-        });
+        if (userPreferences.isAlarmSend()) {
+            getSubsAssociateWithUser(userPreferences)
+                    .forEach(subscriber -> {
+                        notificationResults.append(subscriber.notify(filteredAnimals)).append("\n");
+                    });
+        }
 
         return notificationResults.toString();
     }

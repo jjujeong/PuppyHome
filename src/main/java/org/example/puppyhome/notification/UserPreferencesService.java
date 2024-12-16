@@ -12,7 +12,6 @@ public class UserPreferencesService {
         this.userPreferencesRepository = userPreferencesRepository;
     }
 
-
     public void updatePreferences(String userId, AnimalFilter animalFilter, boolean alarmSend, String email, String phone, String appId) {
         UserPreferences userPreferences = userPreferencesRepository.findByUserId(userId).orElse(null);
 
@@ -35,5 +34,4 @@ public class UserPreferencesService {
     public Iterable<UserPreferences> getUsersWithAlarmSendTrue() {
         return userPreferencesRepository.findByAlarmSend(true);
     }
-
 }

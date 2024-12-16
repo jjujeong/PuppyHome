@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @Tag(name = "선호 동물 정보 입력 및 알림 발송 기능")
 public class MainController {
@@ -59,20 +61,43 @@ public class MainController {
     public ResponseEntity<String> sendAlarm() {
         Iterable<UserPreferences> users = userPreferencesService.getUsersWithAlarmSendTrue();
 
+        // 기존 구독정보를 불러와서 알람 매니저에 갱신
+        users.forEach(user -> {
+
+            String phone = user.getPhone();
+            String email = user.getEmail();
+            String appId = user.getAppId();
+
+            if (phone != null && !phone.isEmpty()) {
+                if (!alarmManager.checkExists(phone)) {
+                    alarmManager.subscribe(new PhoneSubscriber(phone));
+                }
+            }
+            if (email != null && !email.isEmpty()) {
+                if (!alarmManager.checkExists(email)) {
+                    alarmManager.subscribe(new EmailSubscriber(email));
+                }
+            }
+            if (appId != null && !appId.isEmpty()) {
+                if (!alarmManager.checkExists(appId)) {
+                    alarmManager.subscribe(new AppSubscriber(appId));
+                }
+            }
+        });
+
         StringBuilder notificationResult = new StringBuilder();
 
-        users.forEach(userPreferences -> {
-            AnimalFilter filter = userPreferences.getAnimalFilter();
-            String userId = userPreferences.getUserId();
 
-            String result = alarmManager.notifyAlarmOn(filter);
-            notificationResult.append("User ID: ").append(userId).append("\n").append(result).append("\n");
+        users.forEach(userPreferences -> {
+            String result = alarmManager.notifyAlarmOn(userPreferences);
+            System.out.println("result: " + result);
+            notificationResult.append("User ID: ").append(userPreferences.getUserId()).append("\n").append(result).append("\n");
         });
 
         if (notificationResult.length() == 0) {
             return ResponseEntity.ok("알림을 받을 사용자가 없습니다.");
         }
 
-        return ResponseEntity.ok("알림이 발송되었습니다: " + notificationResult.toString());
+        return ResponseEntity.ok("알림이 발송되었습니다: \n" + notificationResult.toString());
     }
 }

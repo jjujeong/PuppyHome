@@ -69,4 +69,16 @@ public class UserPreferences {
     public void setAppId(String appId) {
         this.appId = appId;
     }
+
+    @Override
+    public String toString() {
+        return "UserPreferences{" +
+                "userId='" + userId + '\'' +
+                ", animalFilter=" + animalFilter +
+                ", alarmSend=" + alarmSend +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", appId='" + appId + '\'' +
+                '}';
+    }
 }
