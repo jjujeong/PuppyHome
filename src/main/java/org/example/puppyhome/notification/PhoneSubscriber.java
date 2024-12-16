@@ -12,14 +12,19 @@ public class PhoneSubscriber implements Subscriber {
     }
 
     @Override
+    public String getIdentifier() {
+        return phoneNum;
+    }
+
+    @Override
     public String notify(List<Animal> animals) {
         StringBuilder notificationMessage = new StringBuilder();
-        notificationMessage.append("Sending app to: ").append(phoneNum).append("\n");
+        notificationMessage.append("문자로 데이터를 전송합니다. ").append(phoneNum).append("\n");
 
         if (animals.isEmpty()) {
-            notificationMessage.append("No animals matching your criteria.\n");
+            notificationMessage.append("해당하는 동물이 없습니다.\n");
         } else {
-            notificationMessage.append("Matching animals: \n");
+            notificationMessage.append("입력하신 정보의 동물이 있습니다. \n");
             animals.forEach(animal -> notificationMessage.append(animal.toString()).append("\n"));
         }
 

@@ -22,5 +22,4 @@ public class SwaggerConfig {
                 .description("유기동물 크롤링 및 데이터 제공 서비스")
                 .version("0.1");
     }
-
 }
