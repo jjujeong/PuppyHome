@@ -1,6 +1,7 @@
 package org.example.puppyhome.notification;
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@Tag(name = "선호 동물 정보 입력 및 알림 발송 기능")
+@Tag(name = "선호하는 동물 정보 입력 및 알림 발송 기능")
 public class MainController {
     private final UserPreferencesService userPreferencesService;
     private final AlarmManager alarmManager = new AlarmManager();
@@ -23,15 +24,15 @@ public class MainController {
     @Operation(description = "알림을 받고 싶은 선호하는 동물의 정보를 입력합니다. 알림을 받고 싶지 않다면 false로 입력하면 됩니다.")
     public ResponseEntity<String> savePreferences(
             @RequestParam String userId,
-            @RequestParam boolean alarmSend,
-            @RequestParam(required = false) String appId,
-            @RequestParam(required = false) String phone,
-            @RequestParam(required = false) String email,
-            @RequestParam(required = false) String type,
-            @RequestParam(required = false) String breed,
-            @RequestParam(required = false) String intakeAge,
-            @RequestParam(required = false) String furColor,
-            @RequestParam(required = false) String gender){
+            @Parameter(description = "알림을 허용하시면 true")@RequestParam boolean alarmSend,
+            @Parameter(description = "앱 알림") @RequestParam(required = false) String appId,
+            @Parameter(description = "문자 알림") @RequestParam(required = false) String phone,
+            @Parameter(description = "이메일 알림")@RequestParam(required = false) String email,
+            @Parameter(description = "예) 개 , 고양이")@RequestParam(required = false) String type,
+            @Parameter(description = "원하는 동물의 종") @RequestParam(required = false) String breed,
+            @Parameter(description = "예) '3개월령' ,'4개월령, 1년령' ")@RequestParam(required = false) String intakeAge,
+            @Parameter(description = "예) 백색, 황색, 청색, 황백색, 흑색 등..")@RequestParam(required = false) String furColor,
+            @Parameter(description = "예) 수컷, 암컷, 중성화 수컷, 중성화 암컷")@RequestParam(required = false) String gender){
 
         AnimalFilter animalFilter = new AnimalFilter()
                 .setType(type)
