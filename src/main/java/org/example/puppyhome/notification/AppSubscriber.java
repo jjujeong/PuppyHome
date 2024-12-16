@@ -14,12 +14,12 @@ public class AppSubscriber implements Subscriber {
     @Override
     public String notify(List<Animal> animals) {
         StringBuilder notificationMessage = new StringBuilder();
-        notificationMessage.append("Sending app to: ").append(appId).append("\n");
+        notificationMessage.append("앱으로 알림을 전송합니다. ").append(appId).append("\n");
 
         if (animals.isEmpty()) {
-            notificationMessage.append("No animals matching your criteria.\n");
+
         } else {
-            notificationMessage.append("Matching animals: \n");
+            notificationMessage.append("입력하신 정보의 동물이 있습니다. \n");
             animals.forEach(animal -> notificationMessage.append(animal.toString()).append("\n"));
         }
 

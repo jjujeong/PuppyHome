@@ -2,7 +2,9 @@ package org.example.puppyhome.notification;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.example.puppyhome.dbstorage.model.Animal;
+import jakarta.persistence.Embeddable;
 
+@Embeddable
 @JsonIgnoreProperties(ignoreUnknown = true)
 class AnimalFilter {
     private String breed;
@@ -57,45 +59,50 @@ class AnimalFilter {
         return this;
     }
 
-    public AnimalFilter setIntakeAge(String startAge, String endAge) {
-        this.startAge = parseAge(startAge);
-        this.endAge = parseAge(endAge);
-        return this;
-    }
-
     public AnimalFilter setIntakeAge(String age) {
-        this.startAge = parseAge(age);
-        this.endAge = parseAge(age);
+        if (age == null || age.isEmpty()) {
+            this.startAge = 0.0;
+            this.endAge = 0.0;
+        } else {
+            if (age.contains(",")) {
+                String[] ages = age.split(",");
+                this.startAge = parseAge(ages[0].trim());
+                this.endAge = (ages.length > 1) ? parseAge(ages[1].trim()) : this.startAge;
+            } else {
+                this.startAge = parseAge(age);
+                this.endAge = this.startAge;
+            }
+        }
         return this;
     }
 
     private double parseAge(String ageString) {
-        if (ageString == null) return 0.0f;
+        if (ageString == null || ageString.isEmpty()) return 0.0;
         double age = 0.0;
         try {
             if (ageString.contains("(추정)")) {
                 String filterAgeString = ageString.split("(추정)")[0].trim();
-                if (filterAgeString.contains("년령")) {
-                    String yearPart = filterAgeString.split("년령")[0].trim();
-                    age = Double.parseDouble(yearPart) * 12;
-                }
-                else if (filterAgeString.contains("개월령")) {
-                    String monthPart = filterAgeString.split("개월령")[0].trim();
-                    age = Double.parseDouble(monthPart);
-                }
+                transformAge(filterAgeString);
             } else {
-                if (ageString.contains("년령")) {
-                    String yearPart = ageString.split("년령")[0].trim();
-                    age = Double.parseDouble(yearPart) * 12;
-                }
-                else if (ageString.contains("개월령")) {
-                    String monthPart = ageString.split("개월령")[0].trim();
-                    age = Double.parseDouble(monthPart);
-                }
+                transformAge(ageString);
             }
 
         } catch (NumberFormatException e) {
             System.out.println("잘못된 나이 형식입니다: " + ageString);
+        }
+        return age;
+    }
+
+    private double transformAge(String ageString) {
+        double age = 0.0;
+
+        if (ageString.contains("년령")) {
+            String yearPart = ageString.split("년령")[0].trim();
+            age = Double.parseDouble(yearPart) * 12;
+        }
+        else if (ageString.contains("개월령")) {
+            String monthPart = ageString.split("개월")[0].trim();
+            age = Double.parseDouble(monthPart);
         }
         return age;
     }

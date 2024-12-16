@@ -3,30 +3,41 @@ package org.example.puppyhome.notification;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
+@Tag(name = "선호 동물 정보 입력 및 알림 발송 기능")
 public class MainController {
-    @Tag(name = "새로운 유기동물 알림 기능")
-    @GetMapping("/alarm")
-    @Operation(summary = "데이터 크롤링", description = "내가 원하는 동물 정보에 맞는 동물이 입력되면 동물 정보가 알림으로 옵니다.")
-    public ResponseEntity<String> alarm(
+    private final UserPreferencesService userPreferencesService;
+    private final AlarmManager alarmManager = new AlarmManager();
+
+    public MainController(UserPreferencesService userPreferencesService) {
+        this.userPreferencesService = userPreferencesService;
+    }
+
+    @PostMapping("/alarm/preferences")
+    @Operation(description = "알림을 받고 싶은 선호하는 동물의 정보를 입력합니다. 알림을 받고 싶지 않다면 false로 입력하면 됩니다.")
+    public ResponseEntity<String> savePreferences(
+            @RequestParam String userId,
+            @RequestParam boolean alarmSend,
             @RequestParam(required = false) String appId,
             @RequestParam(required = false) String phone,
             @RequestParam(required = false) String email,
             @RequestParam(required = false) String type,
             @RequestParam(required = false) String breed,
-            @RequestParam(required = false) String intakeAgeStart,
-            @RequestParam(required = false) String intakeAgeEnd,
+            @RequestParam(required = false) String intakeAge,
             @RequestParam(required = false) String furColor,
-            @RequestParam(required = false) String gender) {
+            @RequestParam(required = false) String gender){
 
-        AlarmManager alarmManager = new AlarmManager();
+        AnimalFilter animalFilter = new AnimalFilter()
+                .setType(type)
+                .setBreed(breed)
+                .setIntakeAge(intakeAge)
+                .setFurColor(furColor)
+                .setGender(gender);
 
-        // 입력값이 있을 경우에만 구독자 추가
         if (phone != null && !phone.isEmpty()) {
             alarmManager.subscribe(new PhoneSubscriber(phone));
         }
@@ -37,17 +48,31 @@ public class MainController {
             alarmManager.subscribe(new AppSubscriber(appId));
         }
 
-        // 필터 조건 설정
-        AnimalFilter animalFilter = new AnimalFilter()
-                .setType(type)
-                .setBreed(breed)
-                .setIntakeAge(intakeAgeStart, intakeAgeEnd)
-                .setFurColor(furColor)
-                .setGender(gender);
+        userPreferencesService.updatePreferences(userId, animalFilter, alarmSend, email, phone, appId);
 
-        // 알림 발송
-        String notificationResult = alarmManager.notifyAlarmOn(animalFilter);
+        return ResponseEntity.ok("사용자 선호 조건이 저장되었습니다.");
+    }
 
-        return ResponseEntity.ok("알림이 발송되었습니다: " + notificationResult);
+
+    @PostMapping("/alarm/send")
+    @Operation(description = "버튼을 누르면 알림을 받기를 원하는 사용자들에게 알림이 전송됩니다.")
+    public ResponseEntity<String> sendAlarm() {
+        Iterable<UserPreferences> users = userPreferencesService.getUsersWithAlarmSendTrue();
+
+        StringBuilder notificationResult = new StringBuilder();
+
+        users.forEach(userPreferences -> {
+            AnimalFilter filter = userPreferences.getAnimalFilter();
+            String userId = userPreferences.getUserId();
+
+            String result = alarmManager.notifyAlarmOn(filter);
+            notificationResult.append("User ID: ").append(userId).append("\n").append(result).append("\n");
+        });
+
+        if (notificationResult.length() == 0) {
+            return ResponseEntity.ok("알림을 받을 사용자가 없습니다.");
+        }
+
+        return ResponseEntity.ok("알림이 발송되었습니다: " + notificationResult.toString());
     }
 }

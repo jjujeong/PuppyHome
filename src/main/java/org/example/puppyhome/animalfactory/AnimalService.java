@@ -77,7 +77,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@Tag(name = "Animal Object", description = "유기동물 데이터를 처리하는 API")
+@Tag(name = "유기동물 객체 생성", description = "유기동물 데이터를 처리하는 API")
 public class AnimalService {
 
     @Autowired
